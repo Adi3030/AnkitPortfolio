@@ -246,6 +246,11 @@
           <h3>Bank Loan Assistance</h3>
           <p>Project reports and legal documentation for bank loans.</p>
         </div>
+        <div class="service-card">
+          <i class="fa-solid fa-file-invoice"></i>
+          <h3>GST Income TAX Cases</h3>
+          <p>Handled GST and Income Tax cases, providing efficient solutions for tax notices, compliance, assessments, and disputes.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -346,7 +351,7 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT (EMAIL FUNCTIONALITY ADDED) -->
   <section id="contact" class="contact">
     <div class="container">
       <div class="section-title">
@@ -369,11 +374,21 @@
           </div>
         </div>
 
-        <form class="contact-form">
-          <input type="text" placeholder="Full Name" required>
-          <input type="email" placeholder="Email Address" required>
-          <input type="tel" placeholder="Phone Number" required>
-          <textarea rows="5" placeholder="Your Message" required></textarea>
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Web3Forms Access Key: Replace with your actual key -->
+          <input type="hidden" name="access_key" value="dd2d1b30-1cf2-4420-9348-f8fba4ee9d00">
+          
+          <!-- Email Subject -->
+          <input type="hidden" name="subject" value="New Website Inquiry - Ankit Tyagi & Associates">
+          
+          <!-- Optional: Anti-Spam Honeypot -->
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+          <input type="text" name="name" placeholder="Full Name" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+          <input type="tel" name="phone" placeholder="Phone Number" required>
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          
           <button type="submit">Send Enquiry</button>
         </form>
       </div>
