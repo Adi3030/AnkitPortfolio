@@ -100,14 +100,43 @@ window.addEventListener("scroll", () => {
 });
 
 /* =========================================
-   CONTACT FORM HANDLER
+   CONTACT FORM HANDLER (WEB3FORMS INTEGRATION)
 ========================================= */
 const form = document.querySelector(".contact-form");
+
 if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async function (e) {
         e.preventDefault();
-        alert("Thank You! Your enquiry has been received.");
-        form.reset();
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerText;
+
+        // Button state during submission
+        submitBtn.innerText = "Sending...";
+        submitBtn.disabled = true;
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Thank You! Your enquiry has been received successfully.");
+                form.reset();
+            } else {
+                alert("Submission failed: " + (data.message || "Please try again."));
+            }
+        } catch (error) {
+            alert("Something went wrong. Please check your internet connection.");
+        } finally {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+        }
     });
 }
 
@@ -167,7 +196,7 @@ document.querySelectorAll(".service-card").forEach(card => {
 });
 
 /* =========================================
-   SECTION REVEAL Test
+   SECTION REVEAL
 ========================================= */
 const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
